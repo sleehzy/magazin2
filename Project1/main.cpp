@@ -1,8 +1,8 @@
 #include <iostream>
 #include <Windows.h>
 #include <type_traits>
-
-
+#include <map>
+#include <string>
 
 //1.1.яблочный, 1.2 апельсиновый, 1.3.абрикосовый, 1.4.грушевый \n
 //Овощные : 2.1.томатный, 2.2.луковый, 2.3.огуречный \n
@@ -19,8 +19,8 @@
 //
 //std::cin >> choice2;
 
-map<string, map<string, double> > items;
-map<pair<int, int>, string > names;
+std::map<std::string, std::map<std::string, double> > items;
+std::string  names[9];
 
 void fillitems ()
 {
@@ -34,15 +34,15 @@ void fillitems ()
 	items["Чаи"]["чесночный"] = 130;
 	items["Чаи"]["петрушевый"] = 123;
 
-	names[{1, 1}] = "яблочный";
-	names[{1, 2}] = "апельсиновый";
-	names[{1, 3}] = "абрикосовый";
-	names[{1, 4}] = "грушевый";
-	names[{2, 1}] = "томатный";
-	names[{2, 2}] = "луковый";
-	names[{2, 3}] = "огуречный";
-	names[{3, 1}] = "чесночный";
-	names[{3, 2}] = "петрушевый";
+	names[0] = "яблочный";
+	names[1] = "апельсиновый";
+	names[2] = "абрикосовый";
+	names[3] = "грушевый";
+	names[4] = "томатный";
+	names[5] = "луковый";
+	names[6] = "огуречный";
+	names[7] = "чесночный";
+	names[8] = "петрушевый";
 
 
 }
@@ -52,56 +52,15 @@ void fillitems ()
 
 
 
-void addtocart(string a [] , string b[]) 
-{
-	selected_items[a][b]++;
-}
+
 
 void showmenu()
 {
 	std::cout << "Меню\n";
 	std::cout << "- - - - - - - - - - - - - - - - -\n";
-	std::cout << "1. Фруктовый сок\n 2. Овощной сок\n 3. Чай 4.Чек\n\n";
-	std::cout << "- - - - - - - - - - - - - - - - \n"
+	std::cout << "1.яблочный сок\n2.апельсиновы сок\n3.абрикосовый сок \n4.грушевый сок \n5.томатный сок \n6.луковый сок \n7.огуречный сок \n8.чесночный чай\n9.петрушевый чай \n0.Чек\n\n";
+	std::cout << "- - - - - - - - - - - - - - - - \n";
 
-}
-
-void show()
-{
-	cout << "- - - - - - - -" << " - - \nitem";
-
-		int cnt = 1;
-	for (auto& it : items["Фруктовый сок"])
-	{
-		cout << cnt++ << ". " << it.first << "--- Rs." << it.second << "/-\n";
-	}
-	cout << "- - - - - - - - - - - \n";
-}
-
-
-
-void show()
-{
-	cout << "- - - - - - - -" << " - - \nitem";
-
-	int cnt = 1;
-	for (auto& it : items["Овощной сок"])
-	{
-		cout << cnt++ << ". " << it.first << "--- Rs." << it.second << "/-\n";
-	}
-	cout << "- - - - - - - - - - - \n";
-}
-
-void show()
-{
-	cout << "- - - - - - - -" << " - - \nitem";
-
-	int cnt = 1;
-	for (auto& it : items["Чаи"])
-	{
-		cout << cnt++ << ". " << it.first << "--- Rs." << it.second << "/-\n";
-	}
-	cout << "- - - - - - - - - - - \n";
 }
 
 
@@ -117,12 +76,33 @@ int main ()
 	
 	fillitems();
 	
-
+	int choice;
+	double amount;
+	double sum = 0;
 	
 
-	
+	while (true) 
+	{
+		showmenu();
+		std::cout << "Выберите Товар ";
+		std::cin >> choice;
 
-
+		if (choice == 0) break;
+		if (choice < 1 || choice > 9) 
+		{
+			std::cout << "Такого товара не существует выберите другой";
+			continue;
+		}
+		std::cout << "Выберите кол-во товара ";
+		std::cin >> amount;
+		if (amount <= 1) 
+		{
+			std::cout << "Введите конкретное кол-во \n";
+			continue;
+		}
+		std::cout << "Товар Добавлен\n";
+		sum += choice * amount;
+	}
 
 
 
