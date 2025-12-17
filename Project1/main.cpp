@@ -68,10 +68,10 @@ int main ()
 {
 	
 	setlocale(LC_ALL, "ru");
-	srand(time(NULL));
-	{
+	
+	
 		std::cout << "\t\t\t\t\tМагазин: Соки Радосвета\n\n\n\n";
-	}
+	
 
 	
 	fillitems();
@@ -102,11 +102,10 @@ int main ()
 		}
 		std::cout << "Товар Добавлен\n";
 		sum += choice * amount;
-		/*std::string s_ = */
-
+		
 	}
 
-
+	std::cout << "Цена чека: " << sum;
 
 
 
